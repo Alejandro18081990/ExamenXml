@@ -46,8 +46,8 @@ class MainActivity : AppCompatActivity() {
         //Escritura en fichero interno
         var receta = Receta()
         var ingredientes = arrayOf(
-            Ingrediente(Alimento(Proteina(5f), Grasa(5f), Hidrato(5f)), "Azucar"),
-            Ingrediente(Alimento(Proteina(5f), Grasa(5f), Hidrato(5f)), "Leche")
+            Ingrediente(Alimento(Proteina(5f), Grasa(5f), Hidrato(5f)), "Azucar",1.1f),
+            Ingrediente(Alimento(Proteina(5f), Grasa(5f), Hidrato(5f)), "Leche",200f)
         )
         for (ingrediente in ingredientes)
             modelViewReceta.addIngrediente(ingrediente)
