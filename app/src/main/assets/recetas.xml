@@ -19,7 +19,7 @@
         <alimento>
             <proteinas cantidad100g="21" />
             <grasas cantidad100g="6" />
-            <hidratos cantidad100g= "1" />
+            <hidratos cantidad100g= "1.5" />
         </alimento>
         <cantidad>30</cantidad>
     </ingrediente>

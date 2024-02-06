@@ -21,9 +21,9 @@ class MainActivity : AppCompatActivity() {
 
         //Lectura fichero
         listado = modelViewReceta.procesarFicheroXml()
-        for (alumno in listado){
-            Log.d("VerIngredientesFicheroSimple", alumno.nombre.toString())
-            Log.d("VerIngredientesFicheroSimple", alumno.toString())
+        for (ingrediente in listado) {
+            Log.d("VerIngredientesFicheroSimple", ingrediente.nombre.toString())
+            Log.d("VerIngredientesFicheroSimple", ingrediente.toString())
         }
 
         Log.d(
@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("VerIngredientesSAX", ingrediente.nombre)
             Log.d("VerIngredientesSAX", ingrediente.toString())
         }
+
         Log.d(
             "VerIngredientesSeparador",
             "---------------------------------------------------------------"
@@ -45,8 +46,8 @@ class MainActivity : AppCompatActivity() {
         //Escritura en fichero interno
         var receta = Receta()
         var ingredientes = arrayOf(
-            Ingrediente(Alimento(Proteina(5), Grasa(5), Hidrato(5)), "Azucar"),
-            Ingrediente(Alimento(Proteina(5), Grasa(5), Hidrato(5)), "Leche")
+            Ingrediente(Alimento(Proteina(5f), Grasa(5f), Hidrato(5f)), "Azucar"),
+            Ingrediente(Alimento(Proteina(5f), Grasa(5f), Hidrato(5f)), "Leche")
         )
         for (ingrediente in ingredientes)
             modelViewReceta.addIngrediente(ingrediente)

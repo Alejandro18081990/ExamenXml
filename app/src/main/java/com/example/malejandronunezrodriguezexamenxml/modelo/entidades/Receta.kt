@@ -23,7 +23,7 @@ data class Ingrediente constructor(
     var cantidad: Float = 0.0f,
 )
 
-@Element(name = "Alimento")
+@Root(name = "alimento")
 data class Alimento constructor(
 
     @field:Element(name = "proteinas")
@@ -36,22 +36,22 @@ data class Alimento constructor(
     var hidratos: Hidrato = Hidrato()
 )
 
-@Element(name = "proteina")
+@Element(name = "proteinas")
 data class Proteina constructor(
     @field:Attribute(name = "cantidad100g")
-    var cantidad100: Int = 0
+    var cantidad100: Float = 0.0f
 )
 
 @Element(name = "grasas")
 data class Grasa constructor(
     @field:Attribute(name = "cantidad100g")
-    var cantidad100: Int = 0
+    var cantidad100: Float = 0.0f
 )
 
 @Element(name = "hidratos")
 data class Hidrato constructor(
     @field:Attribute(name = "cantidad100g")
-    var cantidad100: Int = 0
+    var cantidad100: Float = 0.0f
 )
 
 

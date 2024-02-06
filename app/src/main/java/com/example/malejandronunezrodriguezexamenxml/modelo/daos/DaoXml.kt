@@ -41,7 +41,9 @@ class DaoXml constructor(var context: Context) : InterfaceDaoReceta {
             val handler = RecetaHandlerXml()
             val inputStream = context.assets.open(nombreFichero)
             parser.parse(inputStream, handler)
+            Log.d("HandlerIngrediente",handler.listaIngredientes.toString())
             listaIngredientesHandler = handler.listaIngredientes
+
         } catch (e: Exception) {
             Log.d("ErrorSAX", e.message.toString())
         }

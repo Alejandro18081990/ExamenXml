@@ -1,5 +1,6 @@
 package com.example.malejandronunezrodriguezexamenxml.modelo.handlers
 
+import android.util.Log
 import com.example.malejandronunezrodriguezexamenxml.modelo.entidades.*
 import org.xml.sax.Attributes
 import org.xml.sax.SAXException
@@ -14,8 +15,7 @@ class RecetaHandlerXml : DefaultHandler() {
     private var proteina: Proteina? = null
     private var grasa: Grasa? = null
     private var hidratos: Hidrato? = null
-    private var cantidadKcal: Int = 0
-
+    private var cantidadKcal: Float = 0f
     var listaIngredientes: MutableList<Ingrediente> = mutableListOf()
 
 
@@ -34,30 +34,34 @@ class RecetaHandlerXml : DefaultHandler() {
         attributes: Attributes
     ) {
         cadena.setLength(0)
-
+        Log.d("nombreEtiqueta", nombre)
         when (nombre) {
-            "proteinas" -> {
-                proteina = Proteina()
-                proteina!!.cantidad100 = attributes.getValue("cantidad100g").toInt()
+
+            "receta" -> {
+                receta = Receta()
+                receta!!.nombre = attributes.getValue("nombre")
             }
-            "grasas" -> {
-                grasa = Grasa()
-                grasa!!.cantidad100 = attributes.getValue("cantidad100g").toInt()
-            }
-            "hidratos" -> {
-                hidratos = Hidrato()
-                hidratos!!.cantidad100 = attributes.getValue("cantidad100g").toInt()
-            }
-            "alimento" -> {
-                alimento = Alimento()
-            }
+
             "ingrediente" -> {
                 ingrediente = Ingrediente()
                 ingrediente!!.nombre = attributes.getValue("nombre")
             }
-            "receta" -> {
-                receta = Receta()
-                receta!!.nombre = attributes.getValue("nombre")
+
+            "alimento" -> alimento = Alimento()
+
+            "proteinas" -> {
+                proteina = Proteina()
+                proteina!!.cantidad100 = attributes.getValue("cantidad100g").toFloat()
+            }
+
+            "grasas" -> {
+                grasa = Grasa()
+                grasa!!.cantidad100 = attributes.getValue("cantidad100g").toFloat()
+            }
+
+            "hidratos" -> {
+                hidratos = Hidrato()
+                hidratos!!.cantidad100 = attributes.getValue("cantidad100g").toFloat()
             }
         }
         println("startElement: $nombre")
@@ -76,7 +80,19 @@ class RecetaHandlerXml : DefaultHandler() {
                 ingrediente!!.cantidad = cadena.toString().trim().toFloat()
                 //cantidadKcal = (ingrediente!!.alimento.proteinas.cantidad100 * 4) + (ingrediente!!.alimento.hidratos.cantidad100 * 4) + (ingrediente!!.alimento.grasas.cantidad100 * 9) * ingrediente!!.cantidad / 100
             }
-            "receta" -> listaIngredientes.add(ingrediente!!)
+            "alimento" -> {
+                alimento!!.grasas = grasa!!
+                alimento!!.proteinas = proteina!!
+                alimento!!.hidratos = hidratos!!
+            }
+            //Aquí está el error ...
+            //Recuerda que si guardas ingredientes (o el objeto que sea)
+            //en un arrayList, el elemento u objeto en cuestión lo guardas cuando
+            //llegas a la etiqueta de cierre (</ingrediente>) ni antes ni después
+            "ingrediente" ->{
+                ingrediente!!.alimento = alimento!!
+                listaIngredientes.add(ingrediente!!)
+            }
         }
         println("endElement: $nombreLocal $nombre")
     }
